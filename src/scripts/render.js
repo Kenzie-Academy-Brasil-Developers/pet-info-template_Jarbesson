@@ -1,3 +1,4 @@
+import { creatModal } from "./feed.js";
 import { getCurrentUserInfo, getAllPosts } from "./requests.js";
 
 // Renderiza todos os posts
@@ -33,6 +34,10 @@ async function renderPost(post) {
   openButton.classList.add("post__open", "text3", "bold");
   openButton.innerText = "Acessar publicação";
   openButton.dataset.id = post.id;
+
+  openButton.addEventListener('click', () => {
+    creatModal(post)
+  })
 
   postContainer.append(postHeader, postTitle, postContent, openButton);
 

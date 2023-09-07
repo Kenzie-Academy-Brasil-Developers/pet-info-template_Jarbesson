@@ -83,7 +83,7 @@
   content: url(../assets/img/sign-out-alt-grey.svg);
 }
 
-.logout__button:hover > .logout__icon {
+.logout__button:hover>.logout__icon {
   content: url(../assets/img/sign-out-alt-black.svg);
 }
 
@@ -174,4 +174,48 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--brand-1);
+}
+
+/* modal post */
+
+.modal {
+  width: 40%;
+  padding: 24px;
+  overflow-x: hidden;
+}
+
+.userHeaderinfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.item__image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.close {
+  position: relative;
+  bottom: 365px;
+  left: 800px;
+  border: none;
+  border-radius: 4px;
+  width: 30px;
+  background-color: var(--gray-6);
+  padding-left: 10px;
+}
+
+.container {
+  line-height: 24px;
+}
+
+.title__post {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  line-height: 36px;
 }
