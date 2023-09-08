@@ -14,6 +14,7 @@
 
   <!-- SCRIPTS -->
   <script type="module" src="../scripts/feed.js" defer></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body>
@@ -52,15 +53,15 @@
       <h2>Criando novo post</h2>
       <h3>Titulo do post</h3>
 
-      <input class="publish" type="text" placeholder="Digite um titulo aqui.">
+      <input class="publish" type="text" name="title" placeholder="Digite um titulo aqui.">
       <h3>Conteúdo do post</h3>
-      <textarea class="publish " type="text"></textarea>
+      <textarea class="publish " name="content" type="text"></textarea>
     </form>
     <div class="buttons">
-      <button class="exit">Cancelar</button>
+      <button class="button__close">Cancelar</button>
       <button class="post">Publicar</button>
     </div>
-    <p class="exit">X</p>
+    <p class="button__close">X</p>
   </dialog>
 
 </body>

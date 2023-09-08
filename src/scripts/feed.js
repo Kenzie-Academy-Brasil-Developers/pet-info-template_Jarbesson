@@ -1,4 +1,5 @@
 import { renderAllPosts } from "./render.js";
+import { createPost } from "./requests.js";
 
 function showUserMenu() {
   const userAction = document.querySelector(".user__image");
@@ -27,7 +28,7 @@ main();
 
 
 
-export const creatModal = (post) => {
+export const createModal = (post) => {
   console.log(post)
 
   const modal = document.querySelector('.modal')
@@ -82,34 +83,44 @@ export const creatModal = (post) => {
 
 
 
-
-
-
 const showPublish = () => {
   const modal = document.querySelector('.modal__second')
   const button = document.querySelector('#user__newpost')
+  const closeButton = document.querySelectorAll('.button__close')
 
 
   button.addEventListener('click', () => {
-    console.log(button)
-
     modal.showModal()
   })
+  closeButton.addEventListener('click', () => {
+    closeButton.closeModal()
+  })
+
 }
 showPublish()
 
-// const handlePost = () => {
-//   const inputs = document.querySelectorAll('.publish')
-//   const button = document.querySelector('.post')
 
-//   button.addEventListener('click', (e) => {
-//     console.log(button)
-//     e.preventDefault()
-//     const creatPosts = {}
 
-//     inputs.forEach((input) => {
-//       creatPosts[input.name] = input.value
-//     })
-//     creatPost(creatPosts)
-//   })
-// }
+const handlePost = () => {
+  const inputs = document.querySelectorAll('.publish')
+  const button = document.querySelector('.post')
+
+
+  button.addEventListener('click', (e) => {
+    e.preventDefault()
+    const saveInputs = {}
+
+    inputs.forEach((input) => {
+      saveInputs[input.name] = input.value
+    })
+    createPost(saveInputs)
+  })
+}
+handlePost()
+
+
+
+
+
+
+

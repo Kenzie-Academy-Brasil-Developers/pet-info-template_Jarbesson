@@ -1,5 +1,6 @@
 
 import { toast } from "./toast.js";
+import { renderAllPosts } from "./render.js";
 
 export const baseUrl = "http://localhost:3333";
 export const green = '#168821'
@@ -93,22 +94,24 @@ export const creatUser = async (cadastro) => {
   return user
 }
 
-export const creatPost = async (bodyData) => {
-  const creat = await fetch(`${baseUrl}/posts/create`, {
+export const createPost = async (bodyData) => {
+  console.log(bodyData)
+  const newPosts = await fetch(`${baseUrl}/posts/create`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }, body: JSON.stringify(bodyData)
+    headers: requestHeaders,
+    body: JSON.stringify(bodyData)
   }).then((res) => {
     const resConvert = res.json()
     if (res.ok) {
+      renderAllPosts()
+
       return resConvert
     } else {
       toast(resConvert.message, red)
     }
     return resConvert
   })
-  return creat
+  return newPosts
 }
 
 
