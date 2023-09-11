@@ -6,9 +6,9 @@ export const baseUrl = "http://localhost:3333";
 export const green = '#168821'
 export const red = '#df1545'
 
-const token = localStorage.getItem("@petinfo:token");
+let token = localStorage.getItem("@petinfo:token");
 
-const requestHeaders = {
+let requestHeaders = {
   "Content-Type": "application/json",
   Authorization: `Bearer ${token}`,
 };
@@ -30,6 +30,8 @@ export async function getAllPosts() {
     method: "GET",
     headers: requestHeaders,
   });
+
+  console.log(requestHeaders)
   const posts = await request.json();
   return posts;
 }
@@ -49,7 +51,19 @@ export const login = async (loginBody) => {
     .then(async (res) => {
       const resConvert = await res.json()
 
-      localStorage.setItem("@petinfo:token", resConvert.token)
+
+      const token = resConvert.token
+
+      localStorage.setItem("@petinfo:token", token)
+
+      requestHeaders = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      const currentUser = await getCurrentUserInfo();
+
+      localStorage.setItem("@petinfo:user", JSON.stringify(currentUser))
 
       if (res.ok) {
         toast('login realizado com sucesso', green)
@@ -116,16 +130,3 @@ export const createPost = async (bodyData) => {
 
 
 
-
-
-// const deleteUser = async (id) => {
-//   const deleteusers = await fetch(`${baseUrl}/posts/${id}`, {
-//     method: 'DELETE'
-//   }).then((res) => {
-//     const resConvert = res.json()
-//     if (res.ok) {
-//       return resConvert
-//     }
-//   })
-//   deleteusers
-// }

@@ -6,10 +6,14 @@ function showUserMenu() {
   const menu = document.querySelector(".user__logout");
   const button = document.querySelector('.logout__button')
 
-  userAction.addEventListener("click", (e) => {
-    menu.classList.toggle("hidden");
-  });
-  button.addEventListener('click', () => {
+  console.log(userAction, "aaa")
+  if (userAction) {
+
+    userAction.addEventListener("click", (e) => {
+      menu.classList.toggle("hidden");
+    });
+  }
+  button?.addEventListener('click', () => {
     localStorage.removeItem("@petinfo:token")
     location.replace('../../index.html')
   })
@@ -86,15 +90,12 @@ export const createModal = (post) => {
 const showPublish = () => {
   const modal = document.querySelector('.modal__second')
   const button = document.querySelector('#user__newpost')
-  const closeButton = document.querySelectorAll('.button__close')
 
-
-  button.addEventListener('click', () => {
+  button?.addEventListener('click', () => {
     modal.showModal()
+
   })
-  closeButton.addEventListener('click', () => {
-    closeButton.closeModal()
-  })
+
 
 }
 showPublish()
@@ -102,11 +103,14 @@ showPublish()
 
 
 const handlePost = () => {
+  const modal = document.querySelector('.modal__second')
+
   const inputs = document.querySelectorAll('.publish')
-  const button = document.querySelector('.post')
+  const button = document.querySelector('.buttonToPost')
+  const buttonExit = document.querySelector(".cancel")
 
 
-  button.addEventListener('click', (e) => {
+  button?.addEventListener('click', (e) => {
     e.preventDefault()
     const saveInputs = {}
 
@@ -114,6 +118,11 @@ const handlePost = () => {
       saveInputs[input.name] = input.value
     })
     createPost(saveInputs)
+    modal.close()
+
+  })
+  buttonExit.addEventListener('click', () => {
+    modal.close()
   })
 }
 handlePost()

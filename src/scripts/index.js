@@ -12,12 +12,23 @@ const autentication = () => {
 }
 
 const handleLogin = () => {
+    const form = document.querySelector('#form__container__login')
     const inputs = document.querySelectorAll('.input__login')
     const button = document.querySelector('.btn__login')
     let count = 0
 
+    console.log(form, "form")
+
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        console.log('Deu certo')
+    })
+
     button.addEventListener('click', (e) => {
         e.preventDefault()
+
+        console.log("CLICOU")
+
         const loginBody = {}
 
         inputs.forEach(input => {

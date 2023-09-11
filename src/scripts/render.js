@@ -1,9 +1,12 @@
-import { creatModal } from "./feed.js";
+import { createModal } from "./feed.js";
 import { getCurrentUserInfo, getAllPosts } from "./requests.js";
+
+let userId = null
 
 // Renderiza todos os posts
 export async function renderAllPosts() {
   const postSection = document.querySelector(".posts");
+  if (!postSection) return
   postSection.innerHTML = "";
   const posts = await getAllPosts();
 
@@ -36,7 +39,7 @@ async function renderPost(post) {
   openButton.dataset.id = post.id;
 
   openButton.addEventListener('click', () => {
-    creatModal(post)
+    createModal(post)
   })
 
   postContainer.append(postHeader, postTitle, postContent, openButton);
@@ -44,15 +47,17 @@ async function renderPost(post) {
   return postContainer;
 }
 
-// Verifica a permissao do usuário para editar/deletar um post
-async function checkEditPermission(authorID) {
-  const { id } = await getCurrentUserInfo();
+const getCurrentUserId = async () => {
+  const currentUser = JSON.parse(localStorage.getItem("@petinfo:user"))
 
-  if (Object.values({ id }, [0]).toString() == authorID) {
-    return true;
-  } else {
-    return false;
-  }
+  userId = currentUser?.id
+}
+getCurrentUserId()
+
+// Verifica a permissao do usuário para editar/deletar um post
+function checkEditPermission(authorID) {
+
+  return userId === authorID
 }
 
 // Renderiza o cabeçalho de um post no feed
@@ -87,7 +92,9 @@ async function renderPostHeader(post) {
 
   postHeader.appendChild(postInfo);
 
-  const editable = await checkEditPermission(userInfo.id);
+  const editable = checkEditPermission(userInfo.id);
+
+  console.log(editable, " editable")
 
   if (editable) {
     const postActions = renderPostActions(post.id);
