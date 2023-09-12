@@ -6,7 +6,7 @@ function showUserMenu() {
   const menu = document.querySelector(".user__logout");
   const button = document.querySelector('.logout__button')
 
-  console.log(userAction, "aaa")
+
   if (userAction) {
 
     userAction.addEventListener("click", (e) => {
@@ -100,35 +100,32 @@ const showPublish = () => {
 }
 showPublish()
 
-
-
 const handlePost = () => {
   const modal = document.querySelector('.modal__second')
 
   const inputs = document.querySelectorAll('.publish')
   const button = document.querySelector('.buttonToPost')
-  const buttonExit = document.querySelector(".cancel")
-
-
-  button?.addEventListener('click', (e) => {
+  const buttonExit = document.querySelector("#exit")
+  
+  
+  button?.addEventListener('click', async (e) => {
     e.preventDefault()
     const saveInputs = {}
-
+    
     inputs.forEach((input) => {
       saveInputs[input.name] = input.value
     })
-    createPost(saveInputs)
+    await createPost(saveInputs)
+   await renderAllPosts()
     modal.close()
-
+    
   })
   buttonExit.addEventListener('click', () => {
     modal.close()
+    console.log(buttonExit)
   })
 }
 handlePost()
-
-
-
 
 
 

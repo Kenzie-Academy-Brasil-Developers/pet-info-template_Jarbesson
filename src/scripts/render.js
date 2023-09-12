@@ -1,5 +1,5 @@
 import { createModal } from "./feed.js";
-import { getCurrentUserInfo, getAllPosts } from "./requests.js";
+import { getAllPosts } from "./requests.js";
 
 let userId = null
 
@@ -9,7 +9,8 @@ export async function renderAllPosts() {
   if (!postSection) return
   postSection.innerHTML = "";
   const posts = await getAllPosts();
-
+  
+  console.log(posts)
   posts.forEach(async (post) => {
     const postArticle = await renderPost(post, true);
     postSection.appendChild(postArticle);

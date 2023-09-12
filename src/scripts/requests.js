@@ -1,6 +1,5 @@
 
 import { toast } from "./toast.js";
-import { renderAllPosts } from "./render.js";
 
 export const baseUrl = "http://localhost:3333";
 export const green = '#168821'
@@ -49,23 +48,23 @@ export const login = async (loginBody) => {
 
   })
     .then(async (res) => {
-      const resConvert = await res.json()
-
-
-      const token = resConvert.token
-
-      localStorage.setItem("@petinfo:token", token)
-
-      requestHeaders = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      };
-
-      const currentUser = await getCurrentUserInfo();
-
-      localStorage.setItem("@petinfo:user", JSON.stringify(currentUser))
-
+     
       if (res.ok) {
+
+        const resConvert = await res.json()
+        const token = resConvert.token
+       
+        localStorage.setItem("@petinfo:token", token)
+  
+        requestHeaders = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+  
+        const currentUser = await getCurrentUserInfo();
+  
+        localStorage.setItem("@petinfo:user", JSON.stringify(currentUser))
+
         toast('login realizado com sucesso', green)
 
         setTimeout(() => {
@@ -117,8 +116,6 @@ export const createPost = async (bodyData) => {
   }).then((res) => {
     const resConvert = res.json()
     if (res.ok) {
-      renderAllPosts()
-
       return resConvert
     } else {
       toast(resConvert.message, red)
