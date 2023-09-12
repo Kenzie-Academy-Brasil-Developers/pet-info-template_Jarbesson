@@ -33,8 +33,7 @@ main();
 
 
 export const createModal = (post) => {
-  console.log(post)
-
+ 
   const modal = document.querySelector('.modal')
   modal.innerHTML = ""
 

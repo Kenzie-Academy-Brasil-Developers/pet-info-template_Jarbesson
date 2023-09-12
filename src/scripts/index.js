@@ -21,13 +21,11 @@ const handleLogin = () => {
 
     form.addEventListener('submit', e => {
         e.preventDefault()
-        console.log('Deu certo')
+       
     })
 
     button.addEventListener('click', (e) => {
         e.preventDefault()
-
-        console.log("CLICOU")
 
         const loginBody = {}
 
