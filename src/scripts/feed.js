@@ -82,6 +82,9 @@ export const createModal = (post) => {
 
   modal.showModal()
 
+  closeX.addEventListener('click', ()=>{
+    modal.close()
+  })
 }
 
 
@@ -94,8 +97,6 @@ const showPublish = () => {
     modal.showModal()
 
   })
-
-
 }
 showPublish()
 
@@ -121,7 +122,7 @@ const handlePost = () => {
   })
   buttonExit.addEventListener('click', () => {
     modal.close()
-    console.log(buttonExit)
+    
   })
 }
 handlePost()

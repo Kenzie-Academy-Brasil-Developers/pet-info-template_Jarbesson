@@ -17,7 +17,6 @@ const handleLogin = () => {
     const button = document.querySelector('.btn__login')
     let count = 0
 
-    console.log(form, "form")
 
     form.addEventListener('submit', e => {
         e.preventDefault()
